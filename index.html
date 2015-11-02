@@ -75,6 +75,7 @@ function checklogin()
         authToken = accessToken;
         console.log('success');
         $('.fb-login-button').remove();
+        $('.auth').removeClass("auth");
 
       } else if (response.status === 'not_authorized') {
         // the user is logged in to Facebook, 
