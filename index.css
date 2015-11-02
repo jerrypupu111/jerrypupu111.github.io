@@ -1,11 +1,24 @@
+.auth
+{
+/*	display: none;*/
+}
+
 @font-face {
     font-family: 'Gotham';
     src: url('GOTHAM-BOLD.TTF');
 }
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: beige;
+	color: #333;
+	font-family: '微軟正黑體';
+}
+.main {
+	/*background-image: url('tw.jpg');*/
+	background-color: beige;
+	background-size: 100%;
 
-.auth
-{
-/*	display: none;*/
 }
 .hidden
 {
@@ -16,4 +29,44 @@ label {
 }
 .bottom-text {
 	margin-bottom: 10px;
+}
+canvas{
+	border-radius: 0px;
+	box-shadow: 2px 3px 4px rgba(34, 25, 25, 0.4);
+
+}
+header {
+	padding: 30px;
+	background: #226F54;
+	color: #fff;
+	z-index: 3;
+}
+.side-bar {
+	float: left;
+	font-size: 16px;
+
+	width: 280px;
+	padding: 15px;
+	margin-top: 5px;
+	border-radius: 10px;
+	background: rgba(255,255,255,0.85);
+	/*background: beige;*/
+	display: inline-block;
+
+}
+.side-bar input{
+	line-height: 16px;
+	font-size: 16px;
+	width: 120px;
+}
+.canvas-area {
+	
+	opacity: 0.95;
+	display: inline-block;
+	
+	background: white;
+	/*width: calc(1000px);*/
+	min-width: 1000px;
+	margin-top: 5px;
+	margin-bottom: 30px;
 }

@@ -10,40 +10,44 @@
 </head>
 <body>
 
-<h1>ONE TAIWAN 生產器</h1>
+<header><h1>ONE TAIWAN 生產器</h1></header>
 
-<div class="fb-login-button" data-scope="publish_actions" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin = "checklogin()"></div>
+<div class="main">
 
-<div class="auth">
-	
+	<div class="side-bar">
+		<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin = "checklogin()"></div>
+		<p><label for="top-text">上標題</label><input id='top-text' class='top-text' type="text" value ='文字'></p>
+		<p><label for="main-text">主標題</label><input id='main-text' class='main-text' type="text" value ='ONE'></p>
 
-
-	<p><label for="top-text">上標題</label><input class='top-text' type="text" value ='top'></p>
-	<p><label for="main-text">主標題</label><input class='main-text' type="text" value ='ONE'></p>
-	<div class="bottom-area">
-	</div>
-
-
-
-	<button id="new" >新增文字</button>
-
-
-	<p id="test">ONE Generatorff</p>
-	<button id="gen-btn" >產生圖案並張貼至活動</button>
-
-	<canvas id="canvas" width="1000" height="1000">
-	</canvas>
-
-	<div class="hidden">
-		<div class="bottom-text-template">
-			<label for="bottom-text">下標</label><input class ='bottom-text' type="text" value='bottom'>
+		<div class="bottom-area">
+			<label for="">下標1</label><input id='bottom-text1' class='bottom-text' type="text" value='文字'>
 			<select class="font-size">
 				<option value="40">小</option>
 				<option value="80" selected>中</option>
 				<option value="150">大</option>
 			</select>
-			<button class="remove-bottom"> 移除 </button>
 		</div>
+
+		<button id="new" >新增下標</button>
+		<button id="gen-btn" >產生圖案</button><br>
+	</div>
+
+	<div class="canvas-area">
+		<canvas id="canvas" width="1000" height="1000"></canvas>
+	</div>
+
+</div>
+
+
+<div class="hidden">
+	<div class="bottom-text-template">
+		<label for="bottom-text">下標</label><input class='bottom-text' type="text" value='文字'>
+		<select class="font-size">
+			<option value="40">小</option>
+			<option value="80" selected>中</option>
+			<option value="150">大</option>
+		</select>
+		<button class="remove-bottom"> 移除 </button>
 	</div>
 </div>
 

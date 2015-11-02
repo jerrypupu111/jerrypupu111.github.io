@@ -1,6 +1,7 @@
 var fontSize = [];
 var fontEndLine = [];
 var defaultFontSize = 80;
+var addable = true;
 $(document).ready(function(){
 	waitForWebfonts(['Gotham'], function() {main()});
 
@@ -17,25 +18,43 @@ $(document).ready(function(){
 			var newFontSize = $(this).find(':selected').val();
 			fontSize[idx] = newFontSize;
 			generate();
+			addableCheck();
 		});
 		$('.bottom-area').on('click', '.remove-bottom', function(){
-			//console.log($(this).parent().index());
-			var idx = $(this).parent().index();
-			fontSize.splice(idx,1);
-			fontEndLine.splice(idx,1);
-			$(this).parent().remove();
-			reindex();
-			generate();
-		});
+      //console.log($(this).parent().index());
+	      var idx = $(this).parent().index();
+	      fontSize.splice(idx,1);
+	      fontEndLine.splice(idx,1);
+	      $(this).parent().remove();
+	      reindex();
+	      generate();
+	      addable = true;
+	    });
 		
 		var bottom_template = $('.bottom-text-template');
 		console.log(bottom_template);
 
-		$('#new').click(function(){
-			newBottom();
-			fontSize.push(defaultFontSize);
-			generate();
-		});
+		fontSize.push(defaultFontSize); // the first default one
+	    $('#new').click(function(){
+	      if(addable) {
+	        newBottom();
+	        fontSize.push(defaultFontSize);
+	        generate();
+	        addableCheck();
+	      }
+	      else {
+	        alert('塞不下囉～');
+	      }
+	    });
+
+	    function addableCheck() {
+	      var len = fontEndLine.length;
+	      
+	      if(fontEndLine[len-1]+main_y >= 920) {
+	        addable = false;
+	      }
+	    }
+
 
 		function reindex()
 		{
@@ -78,27 +97,28 @@ $(document).ready(function(){
 		pattern.onload = generate;
 		
 
-
+		var main_y = 450;
+		var font_family = 'Gotham,LiHei Pro,Microsoft YaHei';
 		function generate()
 		{
-			var main_y = 400;
+			
 
 			ctx.clearRect(0,0,1000,1000);
 			var tempColor = ctx.createPattern(pattern,"repeat");
 			ctx.fillStyle = tempColor;
-			ctx.font = "300px Gotham,Heiti TC,Microsoft YaHei";
+			ctx.font = "300px "+font_family;
 			ctx.textAlign="center";
 			var main_text = $('.main-text').val();
 			ctx.fillText(main_text,500,main_y);
 			
 			ctx.fillStyle = '#000';
-			ctx.font = "120px Gotham";
+			ctx.font = "120px "+font_family;
 			var top_text = $('.top-text').val();
 			
 
 			if(top_text !== '')
 			{
-			  ctx.fillText(top_text,500,main_y-240);  
+			  ctx.fillText(top_text,500,main_y-300);  
 			}
 			
 			
@@ -106,7 +126,7 @@ $(document).ready(function(){
 		  	$('.bottom-area .bottom-text').each(function(index){
 				//console.log($(this).val());
 				//ctx.textBaseline = 'middle';
-				ctx.font = fontSize[index]+"px Gotham";
+				ctx.font = fontSize[index]+"px "+font_family;
 				var bottom_text = $(this).val();
 				var offset;
 
