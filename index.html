@@ -49,21 +49,7 @@ window.fbAsyncInit = function() {
     xfbml      : true,
     version    : 'v2.5'
   });
-
-  console.log('login');
-  FB.login(function(response) {
-    if (response.authResponse) {
-    	//checklogin();
-    	authToken = response.authResponse.accessToken;
-    	console.log('login success');
-    } else {
-
-    }
-   },{
-	    scope: 'publish_actions', 
-	    return_scopes: true
-	});
-
+  checklogin();
 };
 
 function checklogin()
@@ -85,16 +71,29 @@ function checklogin()
         // but has not authenticated your app
       } else {
         // the user isn't logged in to Facebook.
+        FB.login(function(response) {
+		    if (response.authResponse) {
+		    	//checklogin();
+		    	authToken = response.authResponse.accessToken;
+		    	console.log('login success');
+		    } else {
+
+		    }
+		   },{
+			    scope: 'publish_actions', 
+			    return_scopes: true
+			});
       }
      });
 }
 
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId="+appId;
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+	(function(d, s, id){
+	     var js, fjs = d.getElementsByTagName(s)[0];
+	     if (d.getElementById(id)) {return;}
+	     js = d.createElement(s); js.id = id;
+	     js.src = "//connect.facebook.net/en_US/sdk.js";
+	     fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+	</script>
 
 </html>
