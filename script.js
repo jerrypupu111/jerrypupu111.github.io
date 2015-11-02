@@ -136,7 +136,7 @@ $(document).ready(function(){
 			fd.append("message","#ONETAIWAN");
 
 			
-
+			/*
 			try {
 			    $.ajax({
 			        url: "https://graph.facebook.com/me/photos?access_token=" + authToken,
@@ -160,6 +160,7 @@ $(document).ready(function(){
 			} catch (e) {
 			    console.log(e);
 			}
+			*/
 
 			try {
 			    $.ajax({
@@ -171,7 +172,8 @@ $(document).ready(function(){
 			        cache: false,
 			        success: function (data) {
 			            console.log("success " + data);
-			            alert('成功');
+			            console.log(data);
+			            console.log(data.id);
 			            $("#poster").html("Posted Canvas Successfully");
 			        },
 			        error: function (shr, status, data) {
