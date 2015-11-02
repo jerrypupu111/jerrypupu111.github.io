@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title></title>
+	<meta charset='utf-8'>
+	<link rel="stylesheet" href="index.css" />
+	
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src = 'script.js'></script>
+  <style>
+    .top-text, .bottom-text {
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+<p><label for="top-text">上標</label><input class='top-text' type="text" value ='top'></p>
+<div class="bottom-area">
+</div>
+
+
+
+<button id="new" >新增下標</button>
+
+
+<p id="test">ONE Generatorff</p>
+<button id="gen-btn" >generate</button>
+
+<canvas id="canvas" width="1000" height="1000">
+</canvas>
+
+<div class="hidden">
+	<div class="bottom-text-template">
+		<p><label for="bottom-text">下標</label><input class ='bottom-text' type="text" value='bottom'></p>
+		<select class="font-size">
+			<option value="20">小</option>
+			<option value="30">中</option>
+			<option value="40">大</option>
+		</select>
+	</div>
+</div>
+
+</body>
+</html>
