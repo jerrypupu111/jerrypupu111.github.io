@@ -14,32 +14,36 @@
 
 <div class="fb-login-button" scope="publish_actions" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin = "checklogin()"></div>
 
-
-<p><label for="top-text">上標題</label><input class='top-text' type="text" value ='top'></p>
-<p><label for="main-text">主標題</label><input class='main-text' type="text" value ='ONE'></p>
-<div class="bottom-area">
-</div>
+<div class="auth">
+	
 
 
+	<p><label for="top-text">上標題</label><input class='top-text' type="text" value ='top'></p>
+	<p><label for="main-text">主標題</label><input class='main-text' type="text" value ='ONE'></p>
+	<div class="bottom-area">
+	</div>
 
-<button id="new" >新增文字</button>
 
 
-<p id="test">ONE Generatorff</p>
-<button id="gen-btn" >generate</button>
+	<button id="new" >新增文字</button>
 
-<canvas id="canvas" width="1000" height="1000">
-</canvas>
 
-<div class="hidden">
-	<div class="bottom-text-template">
-		<label for="bottom-text">下標</label><input class ='bottom-text' type="text" value='bottom'>
-		<select class="font-size">
-			<option value="40">小</option>
-			<option value="80" selected>中</option>
-			<option value="150">大</option>
-		</select>
-		<button class="remove-bottom"> 移除 </button>
+	<p id="test">ONE Generatorff</p>
+	<button id="gen-btn" >generate</button>
+
+	<canvas id="canvas" width="1000" height="1000">
+	</canvas>
+
+	<div class="hidden">
+		<div class="bottom-text-template">
+			<label for="bottom-text">下標</label><input class ='bottom-text' type="text" value='bottom'>
+			<select class="font-size">
+				<option value="40">小</option>
+				<option value="80" selected>中</option>
+				<option value="150">大</option>
+			</select>
+			<button class="remove-bottom"> 移除 </button>
+		</div>
 	</div>
 </div>
 
@@ -70,6 +74,7 @@ function checklogin()
         var accessToken = response.authResponse.accessToken;
         authToken = accessToken;
         console.log('success');
+        $('.fb-login-button').remove();
 
       } else if (response.status === 'not_authorized') {
         // the user is logged in to Facebook, 
@@ -81,6 +86,8 @@ function checklogin()
 		    	//checklogin();
 		    	authToken = response.authResponse.accessToken;
 		    	console.log('login success');
+		    	$('.fb-login-button').remove();
+		    	$('.auth').removeClass("auth");
 		    } else {
 
 		    }
