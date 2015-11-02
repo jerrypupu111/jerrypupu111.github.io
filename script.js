@@ -98,7 +98,7 @@ $(document).ready(function(){
 
 			if(top_text !== '')
 			{
-			  ctx.fillText(top_text,500,main_y-140);  
+			  ctx.fillText(top_text,500,main_y-240);  
 			}
 			
 			
