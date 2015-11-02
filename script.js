@@ -174,7 +174,7 @@ $(document).ready(function(){
 			            console.log("success " + data);
 			            console.log(data);
 			            console.log(data.id);
-			            window.open('https://www.facebook.com/'+data.id,'_blank')
+			            window.open('https://www.facebook.com/'+data.id,'_blank');
 			            $("#poster").html("Posted Canvas Successfully");
 			        },
 			        error: function (shr, status, data) {
