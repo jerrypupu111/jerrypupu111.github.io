@@ -41,7 +41,7 @@
 
 </body>
 
-<script>
+<script type="text/javascript">
 var appId='1514218208899524';
 var authToken;
 window.fbAsyncInit = function() {
@@ -65,9 +65,6 @@ window.fbAsyncInit = function() {
 	    return_scopes: true
 	});
 
-  
-  
-
 };
 
 function checklogin()
@@ -83,7 +80,6 @@ function checklogin()
         var accessToken = response.authResponse.accessToken;
         authToken = accessToken;
         console.log('success');
-        window.location.replace("/success");
 
       } else if (response.status === 'not_authorized') {
         // the user is logged in to Facebook, 
