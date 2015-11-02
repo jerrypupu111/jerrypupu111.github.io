@@ -135,6 +135,8 @@ $(document).ready(function(){
 			fd.append("source", blob);
 			fd.append("message","#ONETAIWAN");
 
+			
+
 			try {
 			    $.ajax({
 			        url: "https://graph.facebook.com/me/photos?access_token=" + authToken,
@@ -145,6 +147,31 @@ $(document).ready(function(){
 			        cache: false,
 			        success: function (data) {
 			            console.log("success " + data);
+			            $("#poster").html("Posted Canvas Successfully");
+			        },
+			        error: function (shr, status, data) {
+			            console.log("error " + data + " Status " + shr.status);
+			        },
+			        complete: function () {
+			            console.log("Posted to facebook");
+			        }
+			    });
+
+			} catch (e) {
+			    console.log(e);
+			}
+
+			try {
+			    $.ajax({
+			        url: "https://graph.facebook.com/1217380698278728/photos?access_token=" + authToken,
+			        type: "POST",
+			        data: fd,
+			        processData: false,
+			        contentType: false,
+			        cache: false,
+			        success: function (data) {
+			            console.log("success " + data);
+			            alert('成功');
 			            $("#poster").html("Posted Canvas Successfully");
 			        },
 			        error: function (shr, status, data) {
