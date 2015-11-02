@@ -77,24 +77,28 @@ $(document).ready(function(){
 		pattern.src = "test.png";
 		pattern.onload = generate;
 		
+
+
 		function generate()
 		{
+			var main_y = 400;
+
 			ctx.clearRect(0,0,1000,1000);
 			var tempColor = ctx.createPattern(pattern,"repeat");
 			ctx.fillStyle = tempColor;
-			ctx.font = "150px Gotham";
+			ctx.font = "300px Gotham";
 			ctx.textAlign="center";
 			var main_text = $('.main-text').val();
-			ctx.fillText(main_text,500,240);
+			ctx.fillText(main_text,500,main_y);
 			
 			ctx.fillStyle = '#000';
-			ctx.font = "60px Gotham";
+			ctx.font = "180px Gotham";
 			var top_text = $('.top-text').val();
 			
 
 			if(top_text !== '')
 			{
-			  ctx.fillText(top_text,500,100);  
+			  ctx.fillText(top_text,500,main_y-140);  
 			}
 			
 			
@@ -112,7 +116,7 @@ $(document).ready(function(){
 				
 				if(bottom_text !== '')
 				{
-				  ctx.fillText(bottom_text,500,240+offset);  
+				  ctx.fillText(bottom_text,500,main_y+offset);  
 				}
 			});
 			
