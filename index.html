@@ -9,13 +9,14 @@
  
 </head>
 <body>
-<p><label for="top-text">上標</label><input class='top-text' type="text" value ='top'></p>
+<p><label for="top-text">上標題</label><input class='top-text' type="text" value ='top'></p>
+<p><label for="main-text">主標題</label><input class='main-text' type="text" value ='ONE'></p>
 <div class="bottom-area">
 </div>
 
 
 
-<button id="new" >新增下標</button>
+<button id="new" >新增文字</button>
 
 
 <p id="test">ONE Generatorff</p>
@@ -26,11 +27,11 @@
 
 <div class="hidden">
 	<div class="bottom-text-template">
-		<p><label for="bottom-text">下標</label><input class ='bottom-text' type="text" value='bottom'></p>
+		<label for="bottom-text">下標</label><input class ='bottom-text' type="text" value='bottom'>
 		<select class="font-size">
-			<option value="20">小</option>
-			<option value="30">中</option>
-			<option value="40">大</option>
+			<option value="40">小</option>
+			<option value="80" selected>中</option>
+			<option value="120">大</option>
 		</select>
 		<button class="remove-bottom"> 移除 </button>
 	</div>
@@ -48,12 +49,12 @@ window.fbAsyncInit = function() {
     version    : 'v2.5'
   });
 
+  console.log('login');
   FB.login(function(response) {
     if (response.authResponse) {
     	//checklogin();
     	authToken = response.authResponse.accessToken;
-
-    	console.log(response);
+    	console.log('login success');
     } else {
 
     }
