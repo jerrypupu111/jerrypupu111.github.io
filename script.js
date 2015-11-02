@@ -92,7 +92,7 @@ $(document).ready(function(){
 			ctx.fillText(main_text,500,main_y);
 			
 			ctx.fillStyle = '#000';
-			ctx.font = "180px Gotham";
+			ctx.font = "120px Gotham";
 			var top_text = $('.top-text').val();
 			
 

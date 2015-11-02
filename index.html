@@ -3,13 +3,18 @@
 	<title></title>
 	<meta charset='utf-8'>
 	<link rel="stylesheet" href="index.css" />
-	
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script src = 'script.js'></script>
 	<script src ="font.js"></script>
  
 </head>
 <body>
+
+<h1>ONE TAIWAN 生產器</h1>
+
+<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin = "checklogin()"></div>
+
+
 <p><label for="top-text">上標題</label><input class='top-text' type="text" value ='top'></p>
 <p><label for="main-text">主標題</label><input class='main-text' type="text" value ='ONE'></p>
 <div class="bottom-area">
@@ -49,7 +54,7 @@ window.fbAsyncInit = function() {
     xfbml      : true,
     version    : 'v2.5'
   });
-  checklogin();
+
 };
 
 function checklogin()
