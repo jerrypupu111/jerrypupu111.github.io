@@ -1,21 +1,52 @@
+var fontSize = [];
+var fontEndLine = [];
+var defaultFontSize = 80;
 $(document).ready(function(){
-$('.top-text, .bottom-text').on('input', function(){
+	$('.top-text, .main-text').on('input', function(){
 		  generate();
 	});
-	
-	var canvas = document.getElementById("canvas");
-	var ctx = canvas.getContext("2d");
-	var pattern = new Image();
-	
-
-	pattern.src = "test.png";
-	pattern.onload = generate;
+	$('.bottom-area').on('input', '.bottom-text', function(){
+		generate();
+	});
+	$('.bottom-area').on('change', '.font-size', function(){
+		var idx = $(this).index('.font-size');
+		var newFontSize = $(this).find(':selected').val();
+		fontSize[idx] = newFontSize;
+		generate();
+	});
+	$('.bottom-area').on('click', '.remove-bottom', function(){
+		//console.log($(this).parent().index());
+		var idx = $(this).parent().index();
+		fontSize.splice(idx,1);
+		fontEndLine.splice(idx,1);
+		$(this).parent().remove();
+		reindex();
+		generate();
+	});
 	
 	var bottom_template = $('.bottom-text-template');
 	console.log(bottom_template);
+
 	$('#new').click(function(){
-		newBottom()
+		newBottom();
+		fontSize.push(defaultFontSize);
+		generate();
 	});
+
+	function reindex()
+	{
+		$('.bottom-area label').each(function(index){
+			$(this).text('下標'+parseInt(index+1));
+		});
+	}
+	function newBottom()
+	{
+	  var newBtnTemplate = bottom_template.clone();
+	  var idx = $('.bottom-area .bottom-text').length+1;
+	  newBtnTemplate.find('label').text('下標'+idx);
+	  $('.bottom-area').append(newBtnTemplate);
+	}
+	
 	$('#gen-btn').click(function()
 	{
 		var img_data = render();
@@ -34,39 +65,50 @@ $('.top-text, .bottom-text').on('input', function(){
 		);
 	});
 
-	function newBottom()
-	{
-	  $('.bottom-area').append(bottom_template.clone());
-	}
-	function clear()
-	{
-	  ctx.clearRect(0,0,1000,400);
-	}
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	var pattern = new Image();
+	var rim = new Image();
+	rim.src = 'rim.png';
+	pattern.src = "test.png";
+	pattern.onload = generate;
+	
 	function generate()
 	{
-		clear();
+		ctx.clearRect(0,0,1000,1000);
 		var tempColor = ctx.createPattern(pattern,"repeat");
 		ctx.fillStyle = tempColor;
 		ctx.font = "100px Gotham";
 		ctx.textAlign="center";
-		ctx.fillText("Hello World",300,200);
+		var main_text = $('.main-text').val();
+		ctx.fillText(main_text,300,240);
 		
 		ctx.fillStyle = '#000';
 		ctx.font = "60px Gotham";
 		var top_text = $('.top-text').val();
 		
+
 		if(top_text !== '')
 		{
 		  ctx.fillText(top_text,300,100);  
 		}
 		
 		
-	  $('.bottom-area .bottom-text').each(function(index){
+		
+	  	$('.bottom-area .bottom-text').each(function(index){
 			//console.log($(this).val());
+			//ctx.textBaseline = 'middle';
+			ctx.font = fontSize[index]+"px Gotham";
 			var bottom_text = $(this).val();
+			var offset;
+
+			offset = parseInt(fontEndLine[index-1])+parseInt(fontSize[index])+40 || parseInt(fontSize[index])+40;
+			console.log('index: '+index+', offset: '+offset);
+			fontEndLine[index] = offset;
+			
 			if(bottom_text !== '')
 			{
-			  ctx.fillText(bottom_text,300,300+index*80);  
+			  ctx.fillText(bottom_text,300,240+offset);  
 			}
 		});
 		
@@ -123,5 +165,4 @@ $('.top-text, .bottom-text').on('input', function(){
 	}
 	return new Blob([ab], { type: 'image/png' });
 	}
-
 });
