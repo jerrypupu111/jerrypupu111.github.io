@@ -133,7 +133,7 @@ $(document).ready(function(){
 			var fd = new FormData();
 			fd.append("access_token",authToken);
 			fd.append("source", blob);
-			fd.append("message","Photo Text");
+			fd.append("message","#ONETAIWAN");
 
 			try {
 			    $.ajax({
