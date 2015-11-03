@@ -72,21 +72,16 @@ $(document).ready(function(){
 		
 		$('#gen-btn').click(function()
 		{
-			var img_data = render();
-
-			FB.api(
-			    "/me/photos",
-			    "POST",
-			    {
-			        "source": img_data
-			    },
-			    function (response) {
-			      if (response && !response.error) {
-			        /* handle the result */
-			      }
-			    }
-			);
+			
+			var data = canvas.toDataURL('image/png');
+			window.open(data,'_blank');
 		});
+
+		$('#share-btn').click(function()
+		{
+			var img_data = render();
+		});
+
 
 		var canvas = document.getElementById("canvas");
 		var ctx = canvas.getContext("2d");
