@@ -100,7 +100,7 @@ $(document).ready(function(){
 			
 			
 			ctx.clearRect(0,0,1000,1000);
-			ctx.drawImage(rim,500-rim.width/2,200);
+			//ctx.drawImage(rim,500-rim.width/2,200);
 			var tempColor = ctx.createPattern(pattern,"repeat");
 			ctx.fillStyle = tempColor;
 			ctx.font = "300px "+font_family;
