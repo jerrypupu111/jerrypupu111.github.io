@@ -90,6 +90,7 @@ $(document).ready(function(){
 		rim.src = 'rim.png';
 		pattern.src = "test.png";
 		pattern.onload = generate;
+
 		
 
 		var main_y = 450;
@@ -97,8 +98,9 @@ $(document).ready(function(){
 		function generate()
 		{
 			
-
+			
 			ctx.clearRect(0,0,1000,1000);
+			ctx.drawImage(rim,500-rim.width/2,200);
 			var tempColor = ctx.createPattern(pattern,"repeat");
 			ctx.fillStyle = tempColor;
 			ctx.font = "300px "+font_family;
@@ -106,6 +108,9 @@ $(document).ready(function(){
 			var main_text = $('.main-text').val();
 			ctx.fillText(main_text,500,main_y);
 			
+
+			
+
 			ctx.fillStyle = '#000';
 			ctx.font = "120px "+font_family;
 			var top_text = $('.top-text').val();
