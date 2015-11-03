@@ -97,8 +97,7 @@ $(document).ready(function(){
 		var font_family = 'Gotham,LiHei Pro,Microsoft YaHei';
 		function generate()
 		{
-			
-			
+			console.log('generate');
 			ctx.clearRect(0,0,1000,1000);
 			//ctx.drawImage(rim,500-rim.width/2,200);
 			var tempColor = ctx.createPattern(pattern,"repeat");
@@ -109,7 +108,11 @@ $(document).ready(function(){
 			ctx.fillText(main_text,500,main_y);
 			
 
-			
+			for(var i=0;i<images.length;i++)
+			{
+				console.log('draw image');
+				ctx.drawImage(images[i],0,0);
+			}
 
 			ctx.fillStyle = '#000';
 			ctx.font = "120px "+font_family;

@@ -4,13 +4,23 @@
 	<meta charset='utf-8'>
 	<link rel="stylesheet" href="index.css" />
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script src = 'script.js'></script>
-	<script src ="font.js"></script>
+	<script src = 'js/script.js'></script>
+	<script src = 'js/font.js'></script>
+	<script src = "js/image.js"></script>
  
 </head>
 <body>
-
+<table>
+<tr>
+<td>
 <img class="title" src="title.png" alt="">
+</td>
+<td>
+<div class="fb-page" data-href="https://www.facebook.com/onetaiwangen/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/onetaiwangen/"><a href="https://www.facebook.com/onetaiwangen/">ONE Taiwan 產生器</a></blockquote></div></div>
+</td>
+</tr>
+</table>
+
 <header>
 
 <p>注意!! 目前還無法使用FB分享功能!!</p>
@@ -41,11 +51,17 @@
 		<div class="auth">
 		<button id="share-btn" >分享至FaceBook活動頁面</button><br>
 		</div>
+
+		<div class="image-area">
+			<input type='file' onchange="readURL(this);" />
+		</div>
 	</div>
 
 	<div class="canvas-area">
 		<canvas id="canvas" width="1000" height="1000"></canvas>
 	</div>
+
+
 
 </div>
 
