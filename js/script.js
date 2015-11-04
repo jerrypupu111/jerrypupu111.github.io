@@ -11,6 +11,7 @@ $(document).ready(function(){
 		$('#message_area').on('input',function()
 		{
 			message = $(this).val();
+			console.log(message);
 		});
 		$('.top-text, .main-text').on('input', function(){
 			  generate();
@@ -80,6 +81,28 @@ $(document).ready(function(){
 			
 			var data = canvas.toDataURL('image/png');
 			window.open(data,'_blank');
+			var imgur_data = data.replace(/.*,/, '');
+			$.ajax({
+			    url: 'https://api.imgur.com/3/image',
+			    type: 'post',
+			    headers: {
+			        Authorization: 'Client-ID 33b488fb5d5974a'
+			    },
+			    data: {
+			        image: imgur_data,
+			        type: 'base64'
+			    },
+			    success: function(response) {
+			        if(response.success) {
+
+			            var open_url ='https://www.facebook.com/dialog/feed?app_id='+appId+'&display=popup&picture='+response.data.link+'&link=https://www.facebook.com/onetaiwangen/'+'&redirect_uri=https://developers.facebook.com/tools/explorer';
+			            console.log(open_url);
+						window.open(open_url);
+			        }
+			    }
+			});
+			//var open_url ='https://www.facebook.com/dialog/feed?app_id='+appId+'&display=popup&source='+dataURItoBlob(url)+'&link=https://www.facebook.com/onetaiwangen/'+'&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer';
+			//window.open(open_url);
 		});
 
 		$('#share-btn').click(function()
@@ -148,6 +171,7 @@ $(document).ready(function(){
 				}
 			});
 			
+
 			
 		}
 		function render()
@@ -166,7 +190,7 @@ $(document).ready(function(){
 			fd.append("message",message);
 			fd.append("link","https://jerrypupu111.github.io");
 
-			
+			postImage(fd);
 			/*
 			try {
 			    $.ajax({
@@ -193,6 +217,14 @@ $(document).ready(function(){
 			}
 			*/
 
+			
+				
+			
+			//console.log(open_url);
+		}
+
+		function postImage(fd)
+		{
 			try {
 			    $.ajax({
 			        url: "https://graph.facebook.com/1217380698278728/photos?access_token=" + authToken,
@@ -201,13 +233,7 @@ $(document).ready(function(){
 			        processData: false,
 			        contentType: false,
 			        cache: false,
-			        success: function (data) {
-			            console.log("success " + data);
-			            console.log(data);
-			            console.log(data.id);
-			            window.open('https://www.facebook.com/'+data.id,'_blank');
-			            $("#poster").html("Posted Canvas Successfully");
-			        },
+			        success: postImageSuccessCallBack,
 			        error: function (shr, status, data) {
 			            console.log("error " + data + " Status " + shr.status);
 			        },
@@ -219,10 +245,25 @@ $(document).ready(function(){
 			} catch (e) {
 			    console.log(e);
 			}
+
+		}
+
+
+		function postImageSuccessCallBack(data)
+		{
+            console.log("success " + data);
+            console.log(data);
+            console.log(data.id);
+            window.open('https://www.facebook.com/'+data.id,'_blank');
+            $("#poster").html("Posted Canvas Successfully");
+			
+
+			FB.api('/'+data.id,{fields:'full_picture'},function(response){
 				
-			//var open_url ='https://www.facebook.com/dialog/share?app_id='+appid+'&display=popup&href='+dataURLToBlob(url)+'&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer';
-			//window.open(open_url);
-			//console.log(open_url);
+				response.full_picture
+			});
+
+			
 		}
 
 		function dataURItoBlob(dataURI) {
