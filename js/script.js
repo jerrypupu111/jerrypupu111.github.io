@@ -108,9 +108,14 @@ $(document).ready(function(){
 			//window.open(open_url);
 		});
 
-		$('#share-btn').click(function()
+		$('#share-feed-btn').click(function()
 		{
-			var img_data = render();
+			shareToFB('me');
+		});
+
+		$('share-event-btn').click(function()
+		{
+			shareToFB('event');
 		});
 
 
@@ -177,7 +182,19 @@ $(document).ready(function(){
 
 			
 		}
-		function render()
+		function shareToFB(method)
+		{
+			var data = getImage();
+			if(method=='event')
+			{
+				postImage(data,event_fb_url);
+			}
+			else(method=='me')
+			{
+				postImage(data,myfeed_fb_url;
+			}	
+		}
+		function getImage()
 		{
 
 			//var appid = '145634995501895';
@@ -191,46 +208,17 @@ $(document).ready(function(){
 			fd.append("access_token",authToken);
 			fd.append("source", blob);
 			fd.append("message",message);
-			fd.append("link","https://jerrypupu111.github.io");
-
-			postImage(fd);
-			/*
-			try {
-			    $.ajax({
-			        url: "https://graph.facebook.com/me/photos?access_token=" + authToken,
-			        type: "POST",
-			        data: fd,
-			        processData: false,
-			        contentType: false,
-			        cache: false,
-			        success: function (data) {
-			            console.log("success " + data);
-			            $("#poster").html("Posted Canvas Successfully");
-			        },
-			        error: function (shr, status, data) {
-			            console.log("error " + data + " Status " + shr.status);
-			        },
-			        complete: function () {
-			            console.log("Posted to facebook");
-			        }
-			    });
-
-			} catch (e) {
-			    console.log(e);
-			}
-			*/
-
-			
-				
-			
-			//console.log(open_url);
+			return fd;
+	
 		}
 
-		function postImage(fd)
+		var event_fb_url = "https://graph.facebook.com/1217380698278728/photos?access_token=";
+		var myfeed_fb_url = "https://graph.facebook.com/me/photos?access_token=";
+		function postImage(fd,url)
 		{
 			try {
 			    $.ajax({
-			        url: "https://graph.facebook.com/1217380698278728/photos?access_token=" + authToken,
+			        url:  url + authToken,
 			        type: "POST",
 			        data: fd,
 			        processData: false,
@@ -257,15 +245,15 @@ $(document).ready(function(){
             console.log("success " + data);
             console.log(data);
             console.log(data.id);
+            alert('張貼成功!!');
+            
             window.open('https://www.facebook.com/'+data.id,'_blank');
-            $("#poster").html("Posted Canvas Successfully");
 			
-
+            /*
 			FB.api('/'+data.id,{fields:'full_picture'},function(response){
-				
 				response.full_picture
 			});
-
+			*/
 			
 		}
 
