@@ -191,7 +191,7 @@ $(document).ready(function(){
 			}
 			else(method=='me')
 			{
-				postImage(data,myfeed_fb_url;
+				postImage(data,myfeed_fb_url);
 			}	
 		}
 		function getImage()
@@ -246,7 +246,7 @@ $(document).ready(function(){
             console.log(data);
             console.log(data.id);
             alert('張貼成功!!');
-            
+
             window.open('https://www.facebook.com/'+data.id,'_blank');
 			
             /*
