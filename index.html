@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="index.css" />
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script src = "js/fabric.min.js"></script>
-	
+
 	<script src = 'js/script.js'></script>
 	<script src = 'js/font.js'></script>
 	<script src = "js/image.js"></script>
@@ -57,12 +57,13 @@
 		<li>新增物件：</li>
 		<div class="new-area group">
 			<p><button id="add-normal-text">新增一般文字</button><button id="add-color-text">新增彩色文字</button></p>
-			<p>添加圖片</p>
+			<p>點擊添加圖片</p>
 			<input type="image" class="image-btn" id="rim-image" src="rim.png" >
 			<br>
 			<div class="upload">
-				<p>上傳檔案</p>
-				<input type='file' onchange="readURL(this);"><br>
+				<li>上傳檔案</li>
+				<input type='file' onchange="readURL(this);"><br><br>
+				<li>圖片連結網址：</li>
 				<div><input type="text"><button id="load-web-img">載入圖片</button></div>
 			</div>
 		</div>

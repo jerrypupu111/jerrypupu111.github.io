@@ -135,7 +135,9 @@ function create_event()
 	$('.image-btn').click(function()
 	{
 		console.log($(this));
-		canvasEditor.addImage($(this).attr('src'));
+		var img = canvasEditor.addImage($(this).attr('src'),0);
+
+		
 	});
 
 	$('#load-web-img').click(function()
@@ -157,8 +159,6 @@ function share_btn_event_listener()
 			var data = canvas.toDataURL('image/png');
 			window.open(data,'_blank');
 			var imgur_data = data.replace(/.*,/, '');
-
-			
 		});
 
 		$('#share-feed-btn').click(function()

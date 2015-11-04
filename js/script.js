@@ -29,10 +29,15 @@ function CanvasEditor()
     	}
 	});*/
 
-	$(document).keyup(function(e){
+	$(document).unbind('keyup').bind('keyup',function(e){
 	    if(e.keyCode == 8||e.keyCode == 46) {
 	    	if(document.activeElement == $('body').get(0))
-	    	 canvas.getActiveObject().remove();
+	    	 {
+	    	 	 canvas.getActiveObject().remove();
+	    	 	 
+	    	 }
+	    	 e.preventDefault();
+
 	    }
 	    /*
 	    else if(e.keyCode==17)
@@ -49,19 +54,22 @@ function CanvasEditor()
 	{
 		console.log('canvas created');
 		canvas = new fabric.Canvas('canvas');
+		var text2 = myobj.addColorText('ONE',250);
+			text2.top-=60;
+
 		canvas.setBackgroundColor('rgba(255, 255, 255, 1)', function()
 		{
-
-			var text = myobj.addText('TAIWAN',120);
-			text.top+=120
 			
-			var text2 = myobj.addColorText('ONE',250);
-			text2.top-=60;
+			
+			
+			
+			
 
 		});
 		//myobj.addImage('rim.png');
-		
 		canvas.renderAll();
+			canvas.calcOffset();
+
 	}
 	myobj.addColorText = function(string,size)
 	{
@@ -146,14 +154,6 @@ function CanvasEditor()
 
 
 
-
-
-
-
-
-
-
-
 	this.updatelockMovementX = function(is)
 	{
 		currentSelected.lockMovementX = is;
@@ -189,14 +189,15 @@ function CanvasEditor()
 	      },
 	      repeat: 'repeat'
 	    });
-	    createCanvas();
+	    setTimeout(createCanvas, 100);
+	    
 
 	});
 
 	function addPatternToText(text)
 	{
 		pattern_img.scaleToWidth(text.fontSize*3);
-		bg_pattern.offsetX = 100;
+		bg_pattern.offsetX = 450;
 		text.fill = bg_pattern;
 	}
 	this.addImageWithDOM = function(img_dom)
@@ -217,8 +218,9 @@ function CanvasEditor()
 		});
 		canvas.renderAll();
 	}
-	this.addImage =function(url)
+	this.addImage =function(url,order)
 	{
+		
 		fabric.Image.fromURL(url, function(img) {
 		  // scale image down, and flip it, before adding it onto canvas
 		  	img.originY = 'center';
@@ -228,14 +230,16 @@ function CanvasEditor()
 			img.lockUniScaling=true;
 		  	//img.scale(0.5);
 		  	canvas.add(img);
-
+		  	img.moveTo(0);
 		 	img.on('selected', function() {
 				currentSelected = img;
 				sync();
 			});
+	
 		});
 		canvas.renderAll();
-
+		
+		
 	}
 	myobj.currentSelected;
 	//pattern.onload = createCanvas();
