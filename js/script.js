@@ -2,11 +2,16 @@ var fontSize = [];
 var fontEndLine = [];
 var defaultFontSize = 80;
 var addable = true;
+var message = "";
 $(document).ready(function(){
 	waitForWebfonts(['Gotham'], function() {main()});
 
 	function main()
 	{
+		$('#message_area').on('input',function()
+		{
+			message = $(this).val();
+		});
 		$('.top-text, .main-text').on('input', function(){
 			  generate();
 		});
@@ -147,16 +152,19 @@ $(document).ready(function(){
 		}
 		function render()
 		{
+
 			//var appid = '145634995501895';
 			var data = canvas.toDataURL('image/png');
 			try{
 	    	blob = dataURItoBlob(data);
 			}catch(e){console.log(e);}
 
+
 			var fd = new FormData();
 			fd.append("access_token",authToken);
 			fd.append("source", blob);
-			fd.append("message","#ONETAIWAN");
+			fd.append("message",message);
+			fd.append("link","https://jerrypupu111.github.io");
 
 			
 			/*
