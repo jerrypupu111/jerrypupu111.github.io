@@ -17,6 +17,7 @@ function CanvasEditor()
 	pattern.src = "test.png";
 	var currentSelected;
 	
+	/*
 	$(document).keydown(function(e){
     	if(e.keyCode==17)
     	{
@@ -26,13 +27,14 @@ function CanvasEditor()
     	{
     		currentSelected.lockMovementY = true;	
     	}
-	});
+	});*/
 
 	$(document).keyup(function(e){
 	    if(e.keyCode == 8||e.keyCode == 46) {
 	    	if(document.activeElement == $('body').get(0))
 	    	 canvas.getActiveObject().remove();
 	    }
+	    /*
 	    else if(e.keyCode==17)
 	    {
 	    	currentSelected.lockMovementX = false;
@@ -40,7 +42,7 @@ function CanvasEditor()
 	    else if(e.keyCode==16)
     	{
     		currentSelected.lockMovementY = false;	
-    	}
+    	}*/
 	});
 
 	function createCanvas()
@@ -49,14 +51,16 @@ function CanvasEditor()
 		canvas = new fabric.Canvas('canvas');
 		canvas.setBackgroundColor('rgba(255, 255, 255, 1)', function()
 		{
-			var text = myobj.addText('台灣',180);
-			text.top+=100
-			var text1 = myobj.addText('就是力量',100);
-			text1.top+=240;
+
+			var text = myobj.addText('TAIWAN',120);
+			text.top+=120
+			
 			var text2 = myobj.addColorText('ONE',250);
-			text2.top-=100;
+			text2.top-=60;
+
 		});
 		//myobj.addImage('rim.png');
+		
 		canvas.renderAll();
 	}
 	myobj.addColorText = function(string,size)
@@ -138,6 +142,18 @@ function CanvasEditor()
 		currentSelected.setText(str);
 		canvas.renderAll();
 	}
+
+
+
+
+
+
+
+
+
+
+
+
 	this.updatelockMovementX = function(is)
 	{
 		currentSelected.lockMovementX = is;
