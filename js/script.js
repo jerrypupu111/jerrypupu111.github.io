@@ -82,6 +82,8 @@ $(document).ready(function(){
 			var data = canvas.toDataURL('image/png');
 			window.open(data,'_blank');
 			var imgur_data = data.replace(/.*,/, '');
+
+			/*
 			$.ajax({
 			    url: 'https://api.imgur.com/3/image',
 			    type: 'post',
@@ -95,12 +97,13 @@ $(document).ready(function(){
 			    success: function(response) {
 			        if(response.success) {
 
-			            var open_url ='https://www.facebook.com/dialog/feed?app_id='+appId+'&display=popup&picture='+response.data.link+'&link=https://www.facebook.com/onetaiwangen/'+'&redirect_uri=https://developers.facebook.com/tools/explorer';
-			            console.log(open_url);
+			            var open_url ='https://www.facebook.com/dialog/feed?app_id='+appId+'&display=popup&picture='+response.data.link+'&link=https://www.facebook.com/onetaiwangen/'+'&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer';
+			            console.log();
 						window.open(open_url);
 			        }
 			    }
 			});
+*/
 			//var open_url ='https://www.facebook.com/dialog/feed?app_id='+appId+'&display=popup&source='+dataURItoBlob(url)+'&link=https://www.facebook.com/onetaiwangen/'+'&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer';
 			//window.open(open_url);
 		});
