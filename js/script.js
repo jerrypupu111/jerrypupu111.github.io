@@ -110,11 +110,13 @@ $(document).ready(function(){
 
 		$('#share-feed-btn').click(function()
 		{
+			console.log('share to feed');
 			shareToFB('me');
 		});
 
-		$('share-event-btn').click(function()
+		$('#share-event-btn').click(function()
 		{
+			console.log('share to event');
 			shareToFB('event');
 		});
 
@@ -133,7 +135,7 @@ $(document).ready(function(){
 		var font_family = 'Gotham,LiHei Pro,Microsoft YaHei';
 		function generate()
 		{
-			console.log('generate');
+
 			ctx.clearRect(0,0,1000,1000);
 			//ctx.drawImage(rim,500-rim.width/2,200);
 			var tempColor = ctx.createPattern(pattern,"repeat");
@@ -146,7 +148,6 @@ $(document).ready(function(){
 
 			for(var i=0;i<images.length;i++)
 			{
-				console.log('draw image');
 				ctx.drawImage(images[i],0,0);
 			}
 
@@ -185,12 +186,13 @@ $(document).ready(function(){
 		function shareToFB(method)
 		{
 			var data = getImage();
+			console.log(method);
 			if(method=='event')
 			{
 				postImage(data,event_fb_url);
 			}
-			else(method=='me')
-			{
+			else if(method=='me')
+			{	
 				postImage(data,myfeed_fb_url);
 			}	
 		}
