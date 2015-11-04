@@ -9,9 +9,9 @@ readURL = function(input) {
           console.log('on load');
       	  temp_img =new Image();
           temp_img.src = e.target.result;
-          images.push(temp_img);
-          console.log(images);
-          generate();
+          //images.push(temp_img);
+          
+          canvasEditor.addImageWithDOM(temp_img);
       	}
 
       	reader.readAsDataURL(input.files[0]);

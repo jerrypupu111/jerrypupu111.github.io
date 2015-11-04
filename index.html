@@ -1,12 +1,16 @@
 <html>
 <head>
-	<title>ONE TAIWAN 產生器</title>
+	<title>ONETAIWAN產生器</title>
 	<meta charset='utf-8'>
 	<link rel="stylesheet" href="index.css" />
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src = "js/fabric.min.js"></script>
 	<script src = 'js/script.js'></script>
 	<script src = 'js/font.js'></script>
 	<script src = "js/image.js"></script>
+	<script src = "js/event.js"></script>
+
+
  	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -40,12 +44,46 @@
 <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin = "checklogin()">FB登入</div>
 
 <div class="main">
-
+	<table>
+	<td>
 	<div class="side-bar">
-		
-		<p><label for="top-text">上標題</label><input id='top-text' class='top-text' type="text" value ='文字'></p>
-		<p><label for="main-text">主標題</label><input id='main-text' class='main-text' type="text" value ='ONE'></p>
+		<li>圖片大小：</li>
+		<div class="group">
 
+			寬：<input type="number" class="number" max='2048' id="canvas-width" value="800">
+			長：<input type="number" class="number" max='2048' id="canvas-height" value="800">
+		</div>
+		<li>新增物件：</li>
+		<div class="new-area group">
+			<p><button id="add-normal-text">新增一般文字</button><button id="add-color-text">新增彩色文字</button></p>
+			<p>添加圖片</p>
+			<input type="image" class="image-btn" id="rim-image" src="rim.png" >
+			<br>
+			<div class="upload">
+				<p>上傳檔案</p>
+				<input type='file' onchange="readURL(this);"><br>
+				<div><input type="text"><button id="load-web-img">載入圖片</button></div>
+			</div>
+		</div>
+		<br>
+	
+		<li>在點選狀態編輯物件：</li>	
+		<div class='edit-area group'>
+			
+			<h2>文字內容：</h2><input type="text" id='text'></p>
+			<p><button id="centerX">X置中</button><button id="centerY">Y置中</button></p>
+		</div>
+
+		<li>滑鼠鍵盤控制</li>
+		<div class="key group">
+			<p>拖曳可框住以選擇複數物件</p>
+			<p>按delete或backspace可刪除物件</p>
+			<p>按ctrl可以固定Ｘ方向</p>
+			<p>按shift可以固定Ｙ方向</p>	
+		</div>
+		<button id="gen-btn" >產生圖案</button><br>
+		
+		<!--
 		<div class="bottom-area">
 			<label for="">下標1</label><input id='bottom-text1' class='bottom-text' type="text" value='文字'>
 			<select class="font-size">
@@ -57,7 +95,7 @@
 
 		<button id="new" >新增下標</button>
 		<button id="gen-btn" >產生圖案</button><br>
-
+		-->
 		<div class="auth">
 		<p>分享內容：</p>
 		<textarea name="" placeholder="建議加入#ONETAIWAN" id="message_area" cols="30" rows="10"></textarea>
@@ -68,16 +106,15 @@
 		</div>
 
 
-		<div class="image-area">
-			<input type='file' onchange="readURL(this);" />
-		</div>
+		
 	</div>
-
+	</td>
+	<td>
 	<div class="canvas-area">
-		<canvas id="canvas" width="1000" height="1000"></canvas>
+		<canvas id="canvas" width="800" height="800"></canvas>
 	</div>
-
-
+	</td>
+	</table>
 
 </div>
 

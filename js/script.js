@@ -3,136 +3,255 @@ var fontEndLine = [];
 var defaultFontSize = 80;
 var addable = true;
 var message = "";
+
+var canvas;
+var canvasEditor;
+var textarray = new Array;
+function CanvasEditor()
+{
+	myobj = this;
+	var font_family = 'Gotham,LiHei Pro,Microsoft YaHei';
+	var pattern = new Image();
+	var rim = new Image();
+	rim.src = 'rim.png';
+	pattern.src = "test.png";
+	var currentSelected;
+	
+	$(document).keydown(function(e){
+    	if(e.keyCode==17)
+    	{
+    		currentSelected.lockMovementX = true;
+    	}
+    	else if(e.keyCode==16)
+    	{
+    		currentSelected.lockMovementY = true;	
+    	}
+	});
+
+	$(document).keyup(function(e){
+	    if(e.keyCode == 8||e.keyCode == 46) {
+	    	if(document.activeElement == $('body').get(0))
+	    	 canvas.getActiveObject().remove();
+	    }
+	    else if(e.keyCode==17)
+	    {
+	    	currentSelected.lockMovementX = false;
+	    }
+	    else if(e.keyCode==16)
+    	{
+    		currentSelected.lockMovementY = false;	
+    	}
+	});
+
+	function createCanvas()
+	{
+		console.log('canvas created');
+		canvas = new fabric.Canvas('canvas');
+		canvas.setBackgroundColor('rgba(255, 255, 255, 1)', function()
+		{
+			var text = myobj.addText('台灣',180);
+			text.top+=100
+			var text1 = myobj.addText('就是力量',100);
+			text1.top+=240;
+			var text2 = myobj.addColorText('ONE',250);
+			text2.top-=100;
+		});
+		//myobj.addImage('rim.png');
+		canvas.renderAll();
+	}
+	myobj.addColorText = function(string,size)
+	{
+		var text = myobj.addText(string,size);
+		addPatternToText(text);
+		canvas.renderAll();
+		return text;
+	}
+	var ori_w = 800;
+	var ori_h = 800;
+	myobj.setCanvasHeight = function(h)
+	{
+		if(h>2048)
+			h = 2048;
+		ori_h = h;
+		canvas.setHeight(ori_h);
+		canvas.setWidth(ori_w);
+		canvas.calcOffset();
+		canvas.renderAll();
+
+	}
+	myobj.setCanvasWidth = function(w)
+	{
+		if(w>2048)
+			w = 2048;
+		ori_w = w;
+		canvas.setHeight(ori_h);
+		canvas.setWidth(ori_w);
+		canvas.calcOffset();
+		canvas.renderAll();
+	}
+	function sync()
+	{
+		//$(edit_lock_x).prop('checked',currentSelected.lockMovementX);
+	}
+
+	myobj.addText = function(string,size)
+	{
+		var text = new fabric.Text(string, { 
+			left: ori_w/2, top: ori_h/2,
+			originX: 'center',
+			originY: 'center',
+			fontSize:size,
+			fontFamily:font_family,
+			//lockMovementX: true,
+			lockUniScaling: true,
+			textAlign:'center',
+			minScaleLimit: 0.2,
+			maxScaleLimit: 3
+		});
+		
+		canvas.add(text);
+		
+		function syncTextValue()
+		{
+			var text_str = text.getText();
+		 	$(edit_text).val(text_str);
+		}
+		
+
+		text.on('selected', function() {
+			currentSelected = text;
+		  	syncTextValue();
+		  	sync();
+		});
+
+		text.on('scaling', function() {
+			console.log(text.fontSize);
+		  currentSelected = text;
+		});
+
+
+		textarray.push(text);
+		return text;
+	}
+	this.updateText = function(str)
+	{
+		currentSelected.setText(str);
+		canvas.renderAll();
+	}
+	this.updatelockMovementX = function(is)
+	{
+		currentSelected.lockMovementX = is;
+	}
+	this.centerX = function()
+	{
+		currentSelected.left = ori_w/2;
+		canvas.renderAll();
+	}
+	this.centerY = function()
+	{
+		currentSelected.top = ori_h/2;
+		canvas.renderAll();
+	}
+	
+
+	var bg_pattern;
+	var pattern_img;
+	fabric.Image.fromURL('test.png', function(img) {
+
+		pattern_img = img;
+	    var patternSourceCanvas = new fabric.StaticCanvas();
+	    patternSourceCanvas.add(img);
+
+	    bg_pattern = new fabric.Pattern({
+	      source: function() {
+	        patternSourceCanvas.setDimensions({
+	          width: img.getWidth(),
+	          height: img.getHeight(),
+	          
+	        });
+	        return patternSourceCanvas.getElement();
+	      },
+	      repeat: 'repeat'
+	    });
+	    createCanvas();
+
+	});
+
+	function addPatternToText(text)
+	{
+		pattern_img.scaleToWidth(text.fontSize*3);
+		bg_pattern.offsetX = 100;
+		text.fill = bg_pattern;
+	}
+	this.addImageWithDOM = function(img_dom)
+	{
+		console.log(img_dom);
+		var img = new fabric.Image(img_dom, {
+		  originX: 'center',
+		  originY: 'center',
+			 left: ori_w/2,
+			 top: ori_h/2,
+	lockUniScaling:true
+		});
+		canvas.add(img);
+
+		img.on('selected', function() {
+			currentSelected = img;
+			sync();
+		});
+		canvas.renderAll();
+	}
+	this.addImage =function(url)
+	{
+		fabric.Image.fromURL(url, function(img) {
+		  // scale image down, and flip it, before adding it onto canvas
+		  	img.originY = 'center';
+		  	img.originX = 'center';
+		  	img.left = ori_w/2;
+		  	img.top = ori_h/2;
+			img.lockUniScaling=true;
+		  	//img.scale(0.5);
+		  	canvas.add(img);
+
+		 	img.on('selected', function() {
+				currentSelected = img;
+				sync();
+			});
+		});
+		canvas.renderAll();
+
+	}
+	myobj.currentSelected;
+	//pattern.onload = createCanvas();
+}
+
+
 $(document).ready(function(){
-	waitForWebfonts(['Gotham'], function() {main()});
+	waitForWebfonts(['Gotham'], function() {
+		console.log('font done');
+		event_main();
+		share_btn_event_listener();
+		main()
+	});
 
 	function main()
 	{
-		$('#message_area').on('input',function()
-		{
-			message = $(this).val();
-			console.log(message);
-		});
-		$('.top-text, .main-text').on('input', function(){
-			  generate();
-		});
-		$('.bottom-area').on('input', '.bottom-text', function(){
-			generate();
-		});
-		$('.bottom-area').on('change', '.font-size', function(){
-			var idx = $(this).index('.font-size');
-			var newFontSize = $(this).find(':selected').val();
-			fontSize[idx] = newFontSize;
-			generate();
-			addableCheck();
-		});
-		$('.bottom-area').on('click', '.remove-bottom', function(){
-      //console.log($(this).parent().index());
-	      var idx = $(this).parent().index();
-	      fontSize.splice(idx,1);
-	      fontEndLine.splice(idx,1);
-	      $(this).parent().remove();
-	      reindex();
-	      generate();
-	      addable = true;
-	    });
+
+		canvasEditor = new CanvasEditor();
 		
-		var bottom_template = $('.bottom-text-template');
-		console.log(bottom_template);
-
-		fontSize.push(defaultFontSize); // the first default one
-	    $('#new').click(function(){
-	      if(addable) {
-	        newBottom();
-	        fontSize.push(defaultFontSize);
-	        generate();
-	        addableCheck();
-	      }
-	      else {
-	        alert('塞不下囉～');
-	      }
-	    });
-
-	    function addableCheck() {
-	      var len = fontEndLine.length;
-	      
-	      if(fontEndLine[len-1]+main_y >= 920) {
-	        addable = false;
-	      }
-	    }
-
-
-		function reindex()
-		{
-			$('.bottom-area label').each(function(index){
-				$(this).text('下標'+parseInt(index+1));
-			});
-		}
-		function newBottom()
-		{
-		  var newBtnTemplate = bottom_template.clone();
-		  var idx = $('.bottom-area .bottom-text').length+1;
-		  newBtnTemplate.find('label').text('下標'+idx);
-		  $('.bottom-area').append(newBtnTemplate);
-		}
+		var currentSelected;
 		
-		$('#gen-btn').click(function()
-		{
-			
-			var data = canvas.toDataURL('image/png');
-			window.open(data,'_blank');
-			var imgur_data = data.replace(/.*,/, '');
-
-			/*
-			$.ajax({
-			    url: 'https://api.imgur.com/3/image',
-			    type: 'post',
-			    headers: {
-			        Authorization: 'Client-ID 33b488fb5d5974a'
-			    },
-			    data: {
-			        image: imgur_data,
-			        type: 'base64'
-			    },
-			    success: function(response) {
-			        if(response.success) {
-
-			            var open_url ='https://www.facebook.com/dialog/feed?app_id='+appId+'&display=popup&picture='+response.data.link+'&link=https://www.facebook.com/onetaiwangen/'+'&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer';
-			            console.log();
-						window.open(open_url);
-			        }
-			    }
-			});
-*/
-			//var open_url ='https://www.facebook.com/dialog/feed?app_id='+appId+'&display=popup&source='+dataURItoBlob(url)+'&link=https://www.facebook.com/onetaiwangen/'+'&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer';
-			//window.open(open_url);
-		});
-
-		$('#share-feed-btn').click(function()
-		{
-			console.log('share to feed');
-			shareToFB('me');
-		});
-
-		$('#share-event-btn').click(function()
-		{
-			console.log('share to event');
-			shareToFB('event');
-		});
-
-
-		var canvas = document.getElementById("canvas");
-		var ctx = canvas.getContext("2d");
-		var pattern = new Image();
-		var rim = new Image();
-		rim.src = 'rim.png';
-		pattern.src = "test.png";
-		pattern.onload = generate;
+		//var canvas = document.getElementById("canvas");
+		//var ctx = canvas.getContext("2d");
+		
+		//pattern.onload = addText;
 
 		
 
 		var main_y = 450;
-		var font_family = 'Gotham,LiHei Pro,Microsoft YaHei';
+		
+
+		/*
 		function generate()
 		{
 
@@ -183,6 +302,7 @@ $(document).ready(function(){
 
 			
 		}
+		*/
 		function shareToFB(method)
 		{
 			var data = getImage();
@@ -200,6 +320,7 @@ $(document).ready(function(){
 		{
 
 			//var appid = '145634995501895';
+
 			var data = canvas.toDataURL('image/png');
 			try{
 	    	blob = dataURItoBlob(data);
@@ -267,6 +388,33 @@ $(document).ready(function(){
 		    ia[i] = byteString.charCodeAt(i);
 		}
 		return new Blob([ab], { type: 'image/png' });
+		}
+
+		function uploadImgur()
+		{
+			/*
+			$.ajax({
+			    url: 'https://api.imgur.com/3/image',
+			    type: 'post',
+			    headers: {
+			        Authorization: 'Client-ID 33b488fb5d5974a'
+			    },
+			    data: {
+			        image: imgur_data,
+			        type: 'base64'
+			    },
+			    success: function(response) {
+			        if(response.success) {
+
+			            var open_url ='https://www.facebook.com/dialog/feed?app_id='+appId+'&display=popup&picture='+response.data.link+'&link=https://www.facebook.com/onetaiwangen/'+'&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer';
+			            console.log();
+						window.open(open_url);
+			        }
+			    }
+			});
+*/
+			//var open_url ='https://www.facebook.com/dialog/feed?app_id='+appId+'&display=popup&source='+dataURItoBlob(url)+'&link=https://www.facebook.com/onetaiwangen/'+'&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer';
+			//window.open(open_url);
 		}
 	}
 });
