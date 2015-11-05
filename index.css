@@ -116,6 +116,11 @@ input#text{
 }
 #large-btn{
 	color: #fff;
+	background-color: #57d;
+	border-radius: 5px;
+	width: 200px;
+	height: 100px;
+	font-size: 32px;
 }
 #gen-btn{
 	color: #fff;

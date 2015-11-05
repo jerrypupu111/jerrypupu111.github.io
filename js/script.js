@@ -30,7 +30,10 @@ function CanvasEditor()
     	}
     	*/
     	if(e.keyCode == 8||e.keyCode == 46){
-    		e.preventDefault();
+    		if(document.activeElement == $('body').get(0))
+	    	 {
+	    	 	e.preventDefault();
+	    	 }
     	}
     	else if(e.keyCode==38)
 	    {
@@ -71,17 +74,14 @@ function CanvasEditor()
 	{
 		console.log('canvas created');
 		canvas = new fabric.Canvas('canvas');
+		//var text2 = myobj.addColorText('ONE',250);
+		//	text2.top-=60;
+
 		var text2 = myobj.addColorText('ONE',250);
 			text2.top-=60;
 
 		canvas.setBackgroundColor('rgba(255, 255, 255, 1)', function()
 		{
-			
-			
-			
-			
-			
-
 		});
 		//myobj.addImage('rim.png');
 		canvas.renderAll();
@@ -131,6 +131,7 @@ function CanvasEditor()
 			originY: 'center',
 			fontSize:size,
 			fontFamily:font_family,
+			selectable:true,
 			//lockMovementX: true,
 			lockUniScaling: true,
 			textAlign:'center',
