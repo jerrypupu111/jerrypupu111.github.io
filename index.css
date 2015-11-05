@@ -34,6 +34,8 @@ label {
 canvas{
 	border-radius: 0px;
 	box-shadow: 2px 3px 4px rgba(34, 25, 25, 0.4);
+	width: 100px;
+	height: 100px;
 }
 header {
 	padding: 30px;

@@ -17,8 +17,9 @@ function CanvasEditor()
 	pattern.src = "test.png";
 	var currentSelected;
 	
-	/*
+	
 	$(document).keydown(function(e){
+		/*
     	if(e.keyCode==17)
     	{
     		currentSelected.lockMovementX = true;
@@ -27,9 +28,21 @@ function CanvasEditor()
     	{
     		currentSelected.lockMovementY = true;	
     	}
-	});*/
+    	*/
+    	if(e.keyCode==38)
+	    {
+	    	canvas.bringForward(currentSelected);
+	    	e.preventDefault();
+	    }
+	    else if(e.keyCode==40)
+	    {
+	    	canvas.sendBackwards(currentSelected);
+	    	e.preventDefault();
+	    }
+	});
 
 	$(document).unbind('keyup').bind('keyup',function(e){
+		console.log(e.keyCode);
 	    if(e.keyCode == 8||e.keyCode == 46) {
 	    	if(document.activeElement == $('body').get(0))
 	    	 {
@@ -39,6 +52,7 @@ function CanvasEditor()
 	    	 e.preventDefault();
 
 	    }
+	   
 	    /*
 	    else if(e.keyCode==17)
 	    {
@@ -169,6 +183,17 @@ function CanvasEditor()
 		canvas.renderAll();
 	}
 	
+	this.bringToFront = function()
+	{
+		canvas.bringToFront(currentSelected);
+		canvas.renderAll();
+	}
+
+	this.sendToBack = function()
+	{
+		canvas.sendToBack(currentSelected);
+		canvas.renderAll();
+	}
 
 	var bg_pattern;
 	var pattern_img;

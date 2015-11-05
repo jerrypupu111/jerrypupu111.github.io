@@ -18,6 +18,7 @@ function event_main()
 		console.log(document.activeElement);
 	});
 	
+
 	//lock x
 	/*
 	edit_lock_x.on('change',function()
@@ -27,6 +28,15 @@ function event_main()
 		canvasEditor.updatelockMovementX(is);
 	});
 */
+	$('#sendToBack').click(function()
+	{
+		canvasEditor.sendToBack();
+	})
+
+	$('#bringToFront').click(function()
+	{
+		canvasEditor.bringToFront();
+	});
 
 	//set center
 	$(edit_area).find('#centerX').click(function()
@@ -121,6 +131,16 @@ function canvas_main()
 
 
 }
+
+function addPeriod()
+{
+	var text = canvasEditor.addText('。',100);
+	text.left = 50;
+	
+	canvas.renderAll();
+}
+
+
 function create_event()
 {	
 	canvas_main();
@@ -144,6 +164,8 @@ function create_event()
 	{
 		canvasEditor.addImage($(this).siblings('input').val());
 	});
+
+
 /*
 	$('#file').on('change',function()
 	{

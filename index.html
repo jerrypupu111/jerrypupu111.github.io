@@ -35,6 +35,7 @@
 </td>
 </tr>
 </table>
+
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- auto1 -->
 <ins class="adsbygoogle"
@@ -46,10 +47,17 @@
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
+
 <header>
 
 <p>注意!! 目前還無法使用FB分享功能!!</p>
 <p>點擊產生圖案後跳出頁面，在圖片按下右鍵，點選另存圖片或複製圖片即可貼在FB塗鴉牆上</p>
+<h2>使用說明</h2>
+<li>點選任何物件都可以用滑鼠拖曳來移動位置</li>
+<li>拖曳四個角可以放大縮小</li>	
+<li>方向上下鍵可調整物件在圖層的順序</li>
+<li>拖曳可框住以選擇複數物件</li>
+<li>按delete或backspace可刪除物件</li>
 </header>
 
 
@@ -68,6 +76,7 @@
 		<li>新增物件：</li>
 		<div class="new-area group">
 			<p><button id="add-normal-text">新增一般文字</button><button id="add-color-text">新增彩色文字</button></p>
+			<button onclick="addPeriod();">左邊的句點</button>
 			<p>點擊添加圖片</p>
 			<input type="image" class="image-btn" id="rim-image" src="rim.png" >
 			<br>
@@ -85,17 +94,10 @@
 			
 			<h2>文字內容：</h2><input type="text" id='text'></p>
 			<p><button id="centerX">水平置中</button><button id="centerY">垂直置中</button></p>
+			<p><button id="bringToFront">移至最上方</button><button id="sendToBack">移至最底層</button></p>
 		</div>
 
-		<li>滑鼠鍵盤控制</li>
-		<div class="key group">
-			<p>拖曳可框住以選擇複數物件</p>
-			<p>按delete或backspace可刪除物件</p>
-			<!--
-			<p>按ctrl可以固定Ｘ方向</p>
-			<p>按shift可以固定Ｙ方向</p>
-			-->
-		</div>
+		
 		<button id="gen-btn" >產生圖案</button><br>
 		
 		<!--
@@ -128,14 +130,14 @@
 	<div class="canvas-area">
 		<canvas id="canvas" width="800" height="800"></canvas>
 		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<!-- horizontal -->
-			<ins class="adsbygoogle"
-			     style="display:inline-block;width:728px;height:90px"
-			     data-ad-client="ca-pub-5054097744583766"
-			     data-ad-slot="9216017937"></ins>
-			<script>
-			(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
+		<!-- horizontal -->
+		<ins class="adsbygoogle"
+		     style="display:inline-block;width:728px;height:90px"
+		     data-ad-client="ca-pub-5054097744583766"
+		     data-ad-slot="9216017937"></ins>
+		<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
 	</div>
 	</td>
 	</table>
