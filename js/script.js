@@ -78,7 +78,7 @@ function CanvasEditor()
 		//	text2.top-=60;
 
 		var text2 = myobj.addColorText('ONE',250);
-			text2.top-=60;
+			
 
 		canvas.setBackgroundColor('rgba(255, 255, 255, 1)', function()
 		{
@@ -88,13 +88,7 @@ function CanvasEditor()
 			canvas.calcOffset();
 
 	}
-	myobj.addColorText = function(string,size)
-	{
-		var text = myobj.addText(string,size);
-		addPatternToText(text);
-		canvas.renderAll();
-		return text;
-	}
+	
 	var ori_w = 800;
 	var ori_h = 800;
 	myobj.setCanvasHeight = function(h)
@@ -123,20 +117,35 @@ function CanvasEditor()
 		//$(edit_lock_x).prop('checked',currentSelected.lockMovementX);
 	}
 
-	myobj.addText = function(string,size)
+
+	myobj.addColorText = function(string,size,x,y)
 	{
+		var text = myobj.addText(string,size,x,y);
+		addPatternToText(text);
+		canvas.renderAll();
+		return text;
+	}
+	//Add Text
+	myobj.addText = function(string,size,x,y)
+	{
+		if (typeof x === 'undefined') { x = ori_w/2; }
+		if (typeof y === 'undefined') { y = ori_h/2; }
+	
 		var text = new fabric.Text(string, { 
-			left: ori_w/2, top: ori_h/2,
+			left: x, top: y,
 			originX: 'center',
 			originY: 'center',
 			fontSize:size,
 			fontFamily:font_family,
 			selectable:true,
+			lineHeight:1,
 			//lockMovementX: true,
 			lockUniScaling: true,
 			textAlign:'center',
 			minScaleLimit: 0.2,
-			maxScaleLimit: 3
+			maxScaleLimit: 3,
+			hasControls: true,
+    		hasBorders: true
 		});
 		
 		canvas.add(text);

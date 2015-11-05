@@ -134,9 +134,10 @@ function canvas_main()
 
 function addPeriod()
 {
-	var text = canvasEditor.addText('。',100);
-	text.left = 50;
-	
+	var text = canvasEditor.addText('。',80,80);
+	//text.left = 80;
+	console.log(text);
+	canvas.setActiveObject(text);
 	canvas.renderAll();
 }
 
@@ -149,7 +150,7 @@ function create_event()
 	});
 
 	$('#add-color-text').click(function(){
-		canvasEditor.addColorText('ONE',300);
+		canvasEditor.addColorText('ONE',250);
 	});	
 
 	$('.image-btn').click(function()

@@ -114,13 +114,13 @@ input#text{
 	font-size: 32px;
 	width: 240px;
 }
-#large-btn{
-	color: #fff;
-	background-color: #57d;
+.large-btn{
+	color: #000;
+	background-color: #efd;
 	border-radius: 5px;
-	width: 200px;
-	height: 100px;
-	font-size: 32px;
+	width: 120px;
+	height: 50px;
+	font-size: 16px;
 }
 #gen-btn{
 	color: #fff;
