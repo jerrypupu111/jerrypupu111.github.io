@@ -18,7 +18,7 @@ function CanvasEditor()
 	var currentSelected;
 	
 	
-	$(document).unbind('keyup').bind('keyup',function(e){
+	$(document).unbind('keydown').bind('keydown',function(e){
 		/*
     	if(e.keyCode==17)
     	{
@@ -29,7 +29,7 @@ function CanvasEditor()
     		currentSelected.lockMovementY = true;	
     	}
     	*/
-    	if(e.keyCode == 8||e.keyCode == 46) {
+    	if(e.keyCode == 8||e.keyCode == 46){
     		e.preventDefault();
     	}
     	else if(e.keyCode==38)
