@@ -114,6 +114,9 @@ input#text{
 	font-size: 32px;
 	width: 240px;
 }
+#large-btn{
+	color: #fff;
+}
 #gen-btn{
 	color: #fff;
 	background-color: #57d;

@@ -18,7 +18,7 @@ function CanvasEditor()
 	var currentSelected;
 	
 	
-	$(document).keydown(function(e){
+	$(document).unbind('keyup').bind('keyup',function(e){
 		/*
     	if(e.keyCode==17)
     	{
@@ -29,7 +29,10 @@ function CanvasEditor()
     		currentSelected.lockMovementY = true;	
     	}
     	*/
-    	if(e.keyCode==38)
+    	if(e.keyCode == 8||e.keyCode == 46) {
+    		e.preventDefault();
+    	}
+    	else if(e.keyCode==38)
 	    {
 	    	canvas.bringForward(currentSelected);
 	    	e.preventDefault();
@@ -49,7 +52,7 @@ function CanvasEditor()
 	    	 	 canvas.getActiveObject().remove();
 	    	 	 
 	    	 }
-	    	 e.preventDefault();
+	    	e.preventDefault();
 
 	    }
 	   
