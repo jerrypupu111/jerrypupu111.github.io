@@ -211,15 +211,36 @@ function checklogin()
         var uid = response.authResponse.userID;
         var accessToken = response.authResponse.accessToken;
         authToken = accessToken;
-        console.log('success');
-        removeFB();
+
+        FB.api('/me/permissions', function(response){
+		  if (response && response.data && response.data.length){
+		    var permissions = response.data.shift();
+		    if (permissions.publish_actions) {
+		      	console.log('success');
+        		removeFB();
+		    }
+		    else
+		    {
+		    	console.log('ask for permissions');
+		    	fblogin();
+		    }
+		  }
+		});
+
+        
 
       } else if (response.status === 'not_authorized') {
         // the user is logged in to Facebook, 
         // but has not authenticated your app
       } else {
         // the user isn't logged in to Facebook.
-        FB.login(function(response) {
+        fblogin();
+      }
+     });
+
+	function fblogin()
+	{
+		FB.login(function(response) {
 		    if (response.authResponse) {
 		    	//checklogin();
 		    	authToken = response.authResponse.accessToken;
@@ -230,9 +251,8 @@ function checklogin()
 		   },{
 			    scope: 'publish_actions', 
 			    return_scopes: true
-			});
-      }
-     });
+		});
+	}
 }
 
 	(function(d, s, id){
