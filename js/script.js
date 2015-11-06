@@ -352,7 +352,7 @@ function postImageSuccessCallBack(data)
     console.log(data.id);
     alert('張貼成功!!');
     var url = 'https://www.facebook.com/'+data.id;
-    ga('send','event',{eventCategory:'result',eventAction:'post url','eventLabel',url});
+    ga('send','event',{eventCategory:'result',eventAction:'post url','eventLabel':url});
     window.open(url,'_blank');
 	$('#fblink').attr('href',url);
 	$('#fblink').css('visibility','visible');
