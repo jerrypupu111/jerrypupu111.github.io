@@ -216,7 +216,7 @@ function fblogin()
 		    return_scopes: true
 	});
 }
-	
+
 function checklogin()
 {
 	FB.getLoginStatus(function(response) {
@@ -241,8 +241,10 @@ function checklogin()
 		    {
 		    	if(tryAtStart==0)
 		    	{
+		    		tryAtStart = 1;
 		    		console.log('ask for permissions');
-		    		fblogin();	
+		    		fblogin();
+
 		    	}
 		    	
 		    }
