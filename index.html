@@ -199,6 +199,24 @@ window.fbAsyncInit = function() {
 
 };
 
+var tryAtStart = 0;
+
+function fblogin()
+{
+	FB.login(function(response) {
+	    if (response.authResponse) {
+	    	//checklogin();
+	    	authToken = response.authResponse.accessToken;
+	    	checklogin();
+	    } else {
+
+	    }
+	   },{
+		    scope: 'publish_actions', 
+		    return_scopes: true
+	});
+}
+	
 function checklogin()
 {
 	FB.getLoginStatus(function(response) {
@@ -221,8 +239,12 @@ function checklogin()
 		    }
 		    else
 		    {
-		    	console.log('ask for permissions');
-		    	fblogin();
+		    	if(tryAtStart==0)
+		    	{
+		    		console.log('ask for permissions');
+		    		fblogin();	
+		    	}
+		    	
 		    }
 		  }
 		});
@@ -238,21 +260,7 @@ function checklogin()
       }
      });
 
-	function fblogin()
-	{
-		FB.login(function(response) {
-		    if (response.authResponse) {
-		    	//checklogin();
-		    	authToken = response.authResponse.accessToken;
-		    	removeFB();
-		    } else {
-
-		    }
-		   },{
-			    scope: 'publish_actions', 
-			    return_scopes: true
-		});
-	}
+	
 }
 
 	(function(d, s, id){
