@@ -4,6 +4,7 @@ var edit_font_size;
 var edit_lock_x;
 function wait()
 {
+	ga('send','event',{eventCategory:'click btn',eventAction:'wait'});
 	//_trackEvent("block_click","wait");
 	//setTimeout(unlock,second*1000);
 	setTimeout(countSecond, 1000);
@@ -233,6 +234,7 @@ function share_btn_event_listener()
 		$('#share-event-btn').click(function()
 		{
 			//_trackEvent("click","share event");
+			ga('send','event',{eventCategory:'click btn',eventAction:'share event'});
 			console.log('share to event');
 			shareToFB('event');
 		});
