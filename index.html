@@ -74,16 +74,11 @@
 </header>
 
 <div class ="start-area">
-<table>
-<tr>
-<td>
+
 <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin = "login_btn_click();">登入FB馬上使用</div>
-</td>
-<td>
-<button class="waitBtn" onclick="wait(5);">等10秒解鎖</button>
-</td>
-</tr>
-</table>
+
+<button class="waitBtn" onclick="wait(5);">要不然就等10秒解鎖</button>
+
 </div>
 
 <div class="main auth">
@@ -138,7 +133,7 @@
 		<button id="new" >新增下標</button>
 		<button id="gen-btn" >產生圖案</button><br>
 		-->
-		<div class="auth">
+		<div class="auth-login">
 		<p>分享內容：</p>
 		<textarea name="" placeholder="建議加入#ONETAIWAN" id="message_area" cols="30" rows="10"></textarea>
 		<p>建議在分享內容中加入hashtag: #ONETAIWAN</p>
@@ -237,6 +232,7 @@ function checklogin()
         FB.api('/me/permissions', function(response){
 		  if (response && response.data && response.data.length){
 		    var permissions = response.data.shift();
+		    console.log(permissions);
 		    if (permissions.publish_actions) {
 		      	console.log('success');
         		removeFB();
@@ -260,6 +256,7 @@ function checklogin()
       } else if (response.status === 'not_authorized') {
         // the user is logged in to Facebook, 
         // but has not authenticated your app
+        fblogin();
       } else {
         // the user isn't logged in to Facebook.
         fblogin();

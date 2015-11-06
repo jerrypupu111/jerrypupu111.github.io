@@ -11,7 +11,7 @@ var cnt = 10;
 function countSecond()
 {
 	cnt--;
-	$('.waitBtn').text("等"+cnt+"秒解鎖");
+	$('.waitBtn').text("要不然就等"+cnt+"秒解鎖");
 	if(cnt==0)
 	{
 		unlock();

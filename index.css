@@ -141,6 +141,7 @@ input#text{
 	width: 100%;
 	text-align: center;
 	display:inline-block;
+	position: relative;
 }
 .fb-login-button{
 	margin: auto 0px;
