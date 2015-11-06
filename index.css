@@ -130,3 +130,75 @@ input#text{
 	height: 100px;
 	font-size: 32px;
 }
+
+
+
+
+
+.start-area{
+	padding: 50px;
+	margin: auto 0px;
+	width: 100%;
+	text-align: center;
+	display:inline-block;
+}
+.fb-login-button{
+	margin: auto 0px;
+}
+
+.waitBtn {
+	margin: auto 0px;
+	background-color:#44c767;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.waitBtn:hover {
+	background-color:#29b381;
+}
+.waitBtn:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+
+
+
+
+.share-btn {
+	-moz-box-shadow: 0px 0px 0px 2px #9fb4f2;
+	-webkit-box-shadow: 0px 0px 0px 2px #9fb4f2;
+	box-shadow: 0px 0px 0px 2px #9fb4f2;
+	background-color:#7892c2;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+	padding:12px 37px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+}
+.share-btn:hover {
+	background-color:#476e9e;
+}
+.share-btn:active {
+	position:relative;
+	top:1px;
+}
+

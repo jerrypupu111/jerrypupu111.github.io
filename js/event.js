@@ -2,6 +2,37 @@ var edit_area;
 var edit_text;
 var edit_font_size;
 var edit_lock_x;
+function wait(second)
+{
+	//setTimeout(unlock,second*1000);
+	setTimeout(countSecond, 1000);
+}
+var cnt = 1;
+function countSecond()
+{
+	cnt--;
+	$('.waitBtn').text("等"+cnt+"秒解鎖");
+	if(cnt==0)
+	{
+		unlock();
+	}
+	else
+	{
+		setTimeout(countSecond,1000);	
+	}
+}
+function unlock()
+{
+	$('.auth').removeClass("auth");
+
+	$('.waitBtn').remove();
+}
+function removeFB()
+{
+	$('.fb-login-button').remove();
+    $('.auth').removeClass("auth");
+    $('.waitBtn').remove();
+}
 function event_main()
 {
 	create_event();

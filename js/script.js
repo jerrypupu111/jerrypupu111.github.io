@@ -78,7 +78,8 @@ function CanvasEditor()
 		//	text2.top-=60;
 
 		var text2 = myobj.addColorText('ONE',250);
-			
+		
+		
 
 		canvas.setBackgroundColor('rgba(255, 255, 255, 1)', function()
 		{

@@ -57,7 +57,9 @@
 
 <header>
 
-<p>注意!! 目前還無法使用FB分享功能!!</p>
+<p>可以使用FB分享功能囉!!</p>
+<p>登入FB能讓你直接分享到自己的塗鴉牆，或是分享到我們的活動頁面</p>
+
 <p>點擊產生圖案後跳出頁面，在圖片按下右鍵，點選另存圖片或複製圖片即可貼在FB塗鴉牆上</p>
 <h2>使用說明</h2>
 <li>點選任何物件都可以用滑鼠拖曳來移動位置</li>
@@ -67,10 +69,20 @@
 <li>按delete或backspace可刪除物件</li>
 </header>
 
+<div class ="start-area">
+<table>
+<tr>
+<td>
+<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin = "checklogin()">登入FB馬上使用</div>
+</td>
+<td>
+<button class="waitBtn" onclick="wait(5);">等10秒解鎖</button>
+</td>
+</tr>
+</table>
+</div>
 
-<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin = "checklogin()">FB登入</div>
-
-<div class="main">
+<div class="main auth">
 	<table>
 	<td>
 	<div class="side-bar">
@@ -127,8 +139,8 @@
 		<textarea name="" placeholder="建議加入#ONETAIWAN" id="message_area" cols="30" rows="10"></textarea>
 		<p>建議在分享內容中加入hashtag: #ONETAIWAN</p>
 		<p>可以讓更多人看到你製作的圖片喔</p>
-		<button id="share-event-btn" >分享至FaceBook活動頁面</button><br>
-		<button id="share-feed-btn" >分享至個人塗鴉牆</button><br>
+		<button class="share-btn" id="share-event-btn" >分享至比賽活動頁面</button><br>
+		<button class="share-btn" id="share-feed-btn" >分享至個人塗鴉牆</button><br>
 		</div>
 
 
@@ -178,6 +190,7 @@ window.fbAsyncInit = function() {
     xfbml      : true,
     version    : 'v2.5'
   });
+  checklogin();
 
 };
 
@@ -194,8 +207,7 @@ function checklogin()
         var accessToken = response.authResponse.accessToken;
         authToken = accessToken;
         console.log('success');
-        $('.fb-login-button').remove();
-        $('.auth').removeClass("auth");
+        removeFB();
 
       } else if (response.status === 'not_authorized') {
         // the user is logged in to Facebook, 
@@ -206,9 +218,7 @@ function checklogin()
 		    if (response.authResponse) {
 		    	//checklogin();
 		    	authToken = response.authResponse.accessToken;
-		    	console.log('login success');
-		    	$('.fb-login-button').remove();
-		    	$('.auth').removeClass("auth");
+		    	removeFB();
 		    } else {
 
 		    }
