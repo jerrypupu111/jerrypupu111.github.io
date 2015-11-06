@@ -77,7 +77,7 @@
 <table>
 <tr>
 <td>
-<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin = "checklogin()">登入FB馬上使用</div>
+<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin = "login_btn_click();">登入FB馬上使用</div>
 </td>
 <td>
 <button class="waitBtn" onclick="wait(5);">等10秒解鎖</button>
@@ -200,7 +200,11 @@ window.fbAsyncInit = function() {
 };
 
 var tryAtStart = 0;
-
+function login_btn_click()
+{
+	tryAtStart = 0;
+	checklogin();
+}
 function fblogin()
 {
 	FB.login(function(response) {
