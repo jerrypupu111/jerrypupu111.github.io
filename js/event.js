@@ -212,20 +212,24 @@ function share_btn_event_listener()
 {
 		$('#gen-btn').click(function()
 		{
+			_trackEvent("click","gen image");
 			canvas.deactivateAll().renderAll();
 			var data = canvas.toDataURL('image/png');
 			window.open(data,'_blank');
 			var imgur_data = data.replace(/.*,/, '');
+
 		});
 
 		$('#share-feed-btn').click(function()
 		{
+			_trackEvent("click","share feed");
 			console.log('share to feed');
 			shareToFB('me');
 		});
 
 		$('#share-event-btn').click(function()
 		{
+			_trackEvent("click","share event");
 			console.log('share to event');
 			shareToFB('event');
 		});
