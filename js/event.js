@@ -214,6 +214,7 @@ function share_btn_event_listener()
 		$('#gen-btn').click(function()
 		{
 			//_trackEvent("click","gen image");
+			ga('send','event',{eventCategory:'click btn',eventAction:'gen image'});
 			canvas.deactivateAll().renderAll();
 			var data = canvas.toDataURL('image/png');
 			window.open(data,'_blank');
@@ -224,6 +225,7 @@ function share_btn_event_listener()
 		$('#share-feed-btn').click(function()
 		{
 			//_trackEvent("click","share feed");
+			ga('send','event',{eventCategory:'click btn',eventAction:'share feed'});
 			console.log('share to feed');
 			shareToFB('me');
 		});
