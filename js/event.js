@@ -4,7 +4,7 @@ var edit_font_size;
 var edit_lock_x;
 function wait()
 {
-	_trackEvent("block_click","wait");
+	//_trackEvent("block_click","wait");
 	//setTimeout(unlock,second*1000);
 	setTimeout(countSecond, 1000);
 }
@@ -213,7 +213,7 @@ function share_btn_event_listener()
 {
 		$('#gen-btn').click(function()
 		{
-			_trackEvent("click","gen image");
+			//_trackEvent("click","gen image");
 			canvas.deactivateAll().renderAll();
 			var data = canvas.toDataURL('image/png');
 			window.open(data,'_blank');
@@ -223,14 +223,14 @@ function share_btn_event_listener()
 
 		$('#share-feed-btn').click(function()
 		{
-			_trackEvent("click","share feed");
+			//_trackEvent("click","share feed");
 			console.log('share to feed');
 			shareToFB('me');
 		});
 
 		$('#share-event-btn').click(function()
 		{
-			_trackEvent("click","share event");
+			//_trackEvent("click","share event");
 			console.log('share to event');
 			shareToFB('event');
 		});
