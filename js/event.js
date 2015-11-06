@@ -28,6 +28,7 @@ function unlock()
 	$('.auth').removeClass("auth");
 
 	$('.waitBtn').remove();
+	ga('send','event',{eventCategory:'behavior',eventAction:'unlocked'});
 }
 function removeFB()
 {
