@@ -40,7 +40,8 @@
 <table>
 <tr>
 <td>
-<img class="title" src="title.png" alt="">
+<a href="https://www.facebook.com/events/1217380698278728/"><img class="title" src="title.png" alt=""></a>
+
 </td>
 <td>
 <div class="fb-page" data-href="https://www.facebook.com/onetaiwangen/" data-height="400"  data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/onetaiwangen/"><a href="https://www.facebook.com/onetaiwangen/">ONE Taiwan 產生器</a></blockquote></div></div>
@@ -62,7 +63,7 @@
 
 <header>
 <p>可以使用FB分享功能囉!!</p>
-<p>登入FB能讓你直接分享到自己的塗鴉牆，或是分享到我們的活動頁面</p>
+<p>登入FB能讓你直接分享到自己的塗鴉牆，或是分享到我們的<a href="https://www.facebook.com/events/1217380698278728/">活動頁面</a></p>
 
 <p>點擊產生圖案後跳出頁面，在圖片按下右鍵，點選另存圖片或複製圖片即可貼在FB塗鴉牆上</p>
 <h2>使用說明</h2>
@@ -118,7 +119,7 @@
 		</div>
 
 		
-		<button id="gen-btn" >產生圖案</button><br>
+		<button id="gen-btn" class="waitBtn" >產生圖案</button><br>
 		
 		<!--
 		<div class="bottom-area">
@@ -133,14 +134,18 @@
 		<button id="new" >新增下標</button>
 		<button id="gen-btn" >產生圖案</button><br>
 		-->
+		<div class="not-login">
+			<p>你沒有登入FB無法參加比賽或分享喔QQ</p>
+		</div>
+
 		<div class="auth-login">
-		<p>分享內容：</p>
-		<textarea name="" placeholder="建議加入#ONETAIWAN" id="message_area" cols="30" rows="10"></textarea>
-		<p>建議在分享內容中加入hashtag: #ONETAIWAN</p>
-		<p>可以讓更多人看到你製作的圖片喔</p>
-		<button class="share-btn" id="share-event-btn" >分享至比賽活動頁面</button><br>
-		<button class="share-btn" id="share-feed-btn" >分享至個人塗鴉牆</button><br>
-		<a href="" class="fblink" id="fblink">如果沒有自動跳轉請點擊至分享頁面</a>
+			<p>分享內容：</p>
+			<textarea name="" placeholder="建議加入#ONETAIWAN" id="message_area" cols="30" rows="10"></textarea>
+			<p>建議在分享內容中加入hashtag: #ONETAIWAN</p>
+			<p>可以讓更多人看到你製作的圖片喔</p>
+			<button class="share-btn" id="share-event-btn" >分享至比賽活動頁面</button><br>
+			<button class="share-btn" id="share-feed-btn" >分享至個人塗鴉牆</button><br>
+			<a href="" class="fblink" id="fblink">如果沒有自動跳轉請點擊至分享頁面</a>
 		</div>
 
 
@@ -233,7 +238,7 @@ function checklogin()
 		  if (response && response.data && response.data.length){
 		    var permissions = response.data.shift();
 		    console.log(permissions);
-		    if (permissions.publish_actions) {
+		    if (permissions.permission == 'publish_actions') {
 		      	console.log('success');
         		removeFB();
 		    }

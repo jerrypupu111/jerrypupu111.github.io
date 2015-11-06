@@ -2,6 +2,10 @@
 {
 	display: none;
 }
+.auth-login
+{
+	display: none;
+}
 
 @font-face {
     font-family: 'Gotham';
@@ -122,15 +126,6 @@ input#text{
 	height: 50px;
 	font-size: 16px;
 }
-#gen-btn{
-	color: #fff;
-	background-color: #57d;
-	border-radius: 5px;
-	width: 200px;
-	height: 100px;
-	font-size: 32px;
-}
-
 
 
 

@@ -29,7 +29,9 @@ function unlock()
 }
 function removeFB()
 {
+	$('.not-login').remove();
 	$('.fb-login-button').remove();
+	$('.auth-login').removeClass('auth-login');
     $('.auth').removeClass("auth");
     $('.waitBtn').remove();
 }

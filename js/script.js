@@ -231,7 +231,6 @@ function CanvasEditor()
 	      repeat: 'repeat'
 	    });
 	    setTimeout(createCanvas, 100);
-	    
 
 	});
 
