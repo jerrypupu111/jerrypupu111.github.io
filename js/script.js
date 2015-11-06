@@ -374,7 +374,6 @@ for (var i = 0; i < byteString.length; i++) {
 return new Blob([ab], { type: 'image/png' });
 }
 
-
 $(document).ready(function(){
 	waitForWebfonts(['Gotham'], function() {
 		console.log('font done');
