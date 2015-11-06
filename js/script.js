@@ -302,7 +302,7 @@ function getImage()
 {
 
 	//var appid = '145634995501895';
-
+	canvas.deactivateAll().renderAll();
 	var data = canvas.toDataURL('image/png');
 	try{
 	blob = dataURItoBlob(data);
