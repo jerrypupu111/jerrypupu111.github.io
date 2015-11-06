@@ -2,12 +2,18 @@ var edit_area;
 var edit_text;
 var edit_font_size;
 var edit_lock_x;
+var is_wait_clicked = false;
 function wait()
 {
-	ga('send','event',{eventCategory:'click btn',eventAction:'wait'});
-	//_trackEvent("block_click","wait");
-	//setTimeout(unlock,second*1000);
-	setTimeout(countSecond, 1000);
+	if(is_wait_clicked==false)
+	{
+		is_wait_clicked = true;
+		ga('send','event',{eventCategory:'click btn',eventAction:'wait'});
+		//_trackEvent("block_click","wait");
+		//setTimeout(unlock,second*1000);
+		setTimeout(countSecond, 1000);	
+	}
+	
 }
 var cnt = 10;
 function countSecond()
