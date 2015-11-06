@@ -201,7 +201,9 @@ input#text{
 	position:relative;
 	top:1px;
 }
-
+.fblink{
+	visibility: hidden;
+}
 .warning{
 	padding: 20px;
 	background-color: #e43;

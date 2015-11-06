@@ -7,6 +7,8 @@ var message = "";
 var canvas;
 var canvasEditor;
 var textarray = new Array;
+
+
 function CanvasEditor()
 {
 	myobj = this;
@@ -79,7 +81,7 @@ function CanvasEditor()
 
 		var text2 = myobj.addColorText('ONE',250);
 		
-		
+
 
 		canvas.setBackgroundColor('rgba(255, 255, 255, 1)', function()
 		{
@@ -284,13 +286,103 @@ function CanvasEditor()
 	//pattern.onload = createCanvas();
 }
 
+function shareToFB(method)
+{
+	var data = getImage();
+	console.log(method);
+	if(method=='event')
+	{
+		postImage(data,event_fb_url);
+	}
+	else if(method=='me')
+	{	
+		postImage(data,myfeed_fb_url);
+	}	
+}
+function getImage()
+{
+
+	//var appid = '145634995501895';
+
+	var data = canvas.toDataURL('image/png');
+	try{
+	blob = dataURItoBlob(data);
+	}catch(e){console.log(e);}
+
+
+	var fd = new FormData();
+	fd.append("access_token",authToken);
+	fd.append("source", blob);
+	fd.append("message",message);
+	return fd;
+
+}
+
+var event_fb_url = "https://graph.facebook.com/1217380698278728/photos?access_token=";
+var myfeed_fb_url = "https://graph.facebook.com/me/photos?access_token=";
+function postImage(fd,url)
+{
+	try {
+	    $.ajax({
+	        url:  url + authToken,
+	        type: "POST",
+	        data: fd,
+	        processData: false,
+	        contentType: false,
+	        cache: false,
+	        success: postImageSuccessCallBack,
+	        error: function (shr, status, data) {
+	            console.log("error " + data + " Status " + shr.status);
+	        },
+	        complete: function () {
+	            console.log("Posted to facebook");
+	        }
+	    });
+
+	} catch (e) {
+	    console.log(e);
+	}
+
+}
+
+
+function postImageSuccessCallBack(data)
+{
+    console.log("success " + data);
+    console.log(data);
+    console.log(data.id);
+    alert('張貼成功!!');
+    var url = 'https://www.facebook.com/'+data.id;
+    window.open(url,'_blank');
+	$('#fblink').attr('href',url);
+	$('#fblink').css('visibility','visible');
+    /*
+	shareToFB.api('/'+data.id,{fields:'full_picture'},function(response){
+		response.full_picture
+	});
+	*/
+	
+}
+
+function dataURItoBlob(dataURI) {
+var byteString = atob(dataURI.split(',')[1]);
+var ab = new ArrayBuffer(byteString.length);
+var ia = new Uint8Array(ab);
+for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+}
+return new Blob([ab], { type: 'image/png' });
+}
+
 
 $(document).ready(function(){
 	waitForWebfonts(['Gotham'], function() {
 		console.log('font done');
 		event_main();
 		share_btn_event_listener();
-		main()
+		main();
+
+		//postImageSuccessCallBack('');
 	});
 
 	function main()
@@ -300,154 +392,13 @@ $(document).ready(function(){
 		
 		var currentSelected;
 		
-		//var canvas = document.getElementById("canvas");
-		//var ctx = canvas.getContext("2d");
 		
-		//pattern.onload = addText;
-
 		
 
 		var main_y = 450;
 		
 
-		/*
-		function generate()
-		{
-
-			ctx.clearRect(0,0,1000,1000);
-			//ctx.drawImage(rim,500-rim.width/2,200);
-			var tempColor = ctx.createPattern(pattern,"repeat");
-			ctx.fillStyle = tempColor;
-			ctx.font = "300px "+font_family;
-			ctx.textAlign="center";
-			var main_text = $('.main-text').val();
-			ctx.fillText(main_text,500,main_y);
-			
-
-			for(var i=0;i<images.length;i++)
-			{
-				ctx.drawImage(images[i],0,0);
-			}
-
-			ctx.fillStyle = '#000';
-			ctx.font = "120px "+font_family;
-			var top_text = $('.top-text').val();
-			
-
-			if(top_text !== '')
-			{
-			  ctx.fillText(top_text,500,main_y-300);  
-			}
-			
-			
-			
-		  	$('.bottom-area .bottom-text').each(function(index){
-				//console.log($(this).val());
-				//ctx.textBaseline = 'middle';
-				ctx.font = fontSize[index]+"px "+font_family;
-				var bottom_text = $(this).val();
-				var offset;
-
-				offset = parseInt(fontEndLine[index-1])+parseInt(fontSize[index])+40 || parseInt(fontSize[index])+40;
-				console.log('index: '+index+', offset: '+offset);
-				fontEndLine[index] = offset;
-				
-				if(bottom_text !== '')
-				{
-				  ctx.fillText(bottom_text,500,main_y+offset);  
-				}
-			});
-			
-
-			
-		}
-		*/
-		function shareToFB(method)
-		{
-			var data = getImage();
-			console.log(method);
-			if(method=='event')
-			{
-				postImage(data,event_fb_url);
-			}
-			else if(method=='me')
-			{	
-				postImage(data,myfeed_fb_url);
-			}	
-		}
-		function getImage()
-		{
-
-			//var appid = '145634995501895';
-
-			var data = canvas.toDataURL('image/png');
-			try{
-	    	blob = dataURItoBlob(data);
-			}catch(e){console.log(e);}
-
-
-			var fd = new FormData();
-			fd.append("access_token",authToken);
-			fd.append("source", blob);
-			fd.append("message",message);
-			return fd;
-	
-		}
-
-		var event_fb_url = "https://graph.facebook.com/1217380698278728/photos?access_token=";
-		var myfeed_fb_url = "https://graph.facebook.com/me/photos?access_token=";
-		function postImage(fd,url)
-		{
-			try {
-			    $.ajax({
-			        url:  url + authToken,
-			        type: "POST",
-			        data: fd,
-			        processData: false,
-			        contentType: false,
-			        cache: false,
-			        success: postImageSuccessCallBack,
-			        error: function (shr, status, data) {
-			            console.log("error " + data + " Status " + shr.status);
-			        },
-			        complete: function () {
-			            console.log("Posted to facebook");
-			        }
-			    });
-
-			} catch (e) {
-			    console.log(e);
-			}
-
-		}
-
-
-		function postImageSuccessCallBack(data)
-		{
-            console.log("success " + data);
-            console.log(data);
-            console.log(data.id);
-            alert('張貼成功!!');
-
-            window.open('https://www.facebook.com/'+data.id,'_blank');
-			
-            /*
-			FB.api('/'+data.id,{fields:'full_picture'},function(response){
-				response.full_picture
-			});
-			*/
-			
-		}
-
-		function dataURItoBlob(dataURI) {
-		var byteString = atob(dataURI.split(',')[1]);
-		var ab = new ArrayBuffer(byteString.length);
-		var ia = new Uint8Array(ab);
-		for (var i = 0; i < byteString.length; i++) {
-		    ia[i] = byteString.charCodeAt(i);
-		}
-		return new Blob([ab], { type: 'image/png' });
-		}
+		
 
 		function uploadImgur()
 		{

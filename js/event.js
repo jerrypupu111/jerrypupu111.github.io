@@ -7,7 +7,7 @@ function wait(second)
 	//setTimeout(unlock,second*1000);
 	setTimeout(countSecond, 1000);
 }
-var cnt = 1;
+var cnt = 10;
 function countSecond()
 {
 	cnt--;
