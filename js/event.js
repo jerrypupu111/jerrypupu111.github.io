@@ -30,6 +30,7 @@ function unlock()
 function removeFB()
 {
 	$('.not-login').remove();
+	$('.start-area').remove();
 	$('.fb-login-button').remove();
 	$('.auth-login').removeClass('auth-login');
     $('.auth').removeClass("auth");
