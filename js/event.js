@@ -2,8 +2,9 @@ var edit_area;
 var edit_text;
 var edit_font_size;
 var edit_lock_x;
-function wait(second)
+function wait()
 {
+	_trackEvent("block_click","wait");
 	//setTimeout(unlock,second*1000);
 	setTimeout(countSecond, 1000);
 }

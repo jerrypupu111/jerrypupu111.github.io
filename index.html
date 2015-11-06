@@ -80,7 +80,7 @@
 
 <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin = "login_btn_click();">登入FB馬上使用</div>
 
-<button class="waitBtn greenBtn" onclick="wait(5);">要不然就等10秒解鎖</button>
+<button class="waitBtn greenBtn" onclick="wait();">要不然就等10秒解鎖</button>
 
 </div>
 
@@ -204,6 +204,7 @@ window.fbAsyncInit = function() {
 var tryAtStart = 0;
 function login_btn_click()
 {
+	_trackEvent("block_click","login");
 	tryAtStart = 0;
 	checklogin();
 }
